@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         resultTV = findViewById(R.id.resultTextView);
         solutionTV = findViewById(R.id.solutionTextView);
-
+        String total="";
         btn0 = findViewById(R.id.button_0);
         btn1 = findViewById(R.id.button_1);
         btn2 = findViewById(R.id.button_2);
@@ -57,24 +57,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"0");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"1");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"2");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"3");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
 
@@ -82,99 +94,66 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"4");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"5");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"6");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"7");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
+
             }
         });
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"8");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
+
             }
         });
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"9");
+                btnDot.setEnabled(true);
+                btnMul.setEnabled(true);
+                btnDivide.setEnabled(true);
             }
         });
         btnDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resultTV.setText(resultTV.getText()+".");
+                resultTV.setText(resultTV.getText() + ".");
+                btnDot.setEnabled(false);
+
             }
         });
-
-//        btnBrackOpen.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                resultTV.setText(resultTV.getText()+"(");
-//            }
-//        });
-
-//        btnBrackOpen.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                resultTV.setText(resultTV.getText()+"(");
-//                Toast.makeText(MainActivity.this, "Please choose ')'", Toast.LENGTH_LONG).show();
-//
-////                if(!btnBrackClose.isCheckable()) {
-////                    btnEuquals.setEnabled(false);
-////                }
-//
-//
-////                if (checkBracket){
-////                    process = resultTV.getText().toString();
-////                    resultTV.setText(process + ")");
-////                    checkBracket = true;
-////                }
-////                else{
-////                    process = resultTV.getText().toString();
-////                    resultTV.setText(process + "(");
-////                    checkBracket = true;
-////                }
-//            }
-//        });
-//
-//        btnBrackClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                resultTV.setText(resultTV.getText()+")");
-//                Toast.makeText(MainActivity.this, "Please choose '('", Toast.LENGTH_LONG).show();
-//
-//                if (!btnBrackOpen.isCheckable() ) {
-//                    btnEuquals.setEnabled(false);
-//                }
-//                else {
-//                    btnEuquals.setEnabled(true);
-//                }
-//            }
-//        });
-
-
-//        btnBrackClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                resultTV.setText(resultTV.getText()+")");
-//            }
-//        });
-
 
         btnBracket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,55 +196,69 @@ public class MainActivity extends AppCompatActivity {
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 resultTV.setText(resultTV.getText()+"+");
+                btnDot.setEnabled(false);
+                btnDivide.setEnabled(false);
+                btnMul.setEnabled(false);
             }
         });
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"-");
+                btnDot.setEnabled(false);
+                btnDivide.setEnabled(false);
+                btnMul.setEnabled(false);
             }
         });
         btnMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"×");
+                btnDot.setEnabled(false);
+                btnDivide.setEnabled(false);
+                btnMul.setEnabled(false);
             }
         });
         btnDivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"÷");
+                btnDot.setEnabled(false);
+                btnDivide.setEnabled(false);
+                btnMul.setEnabled(false);
             }
         });
         btnEuquals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if(!btnBrackClose.isClickable()) {
-//                    Toast.makeText(MainActivity.this, "Your syntax is wrong", Toast.LENGTH_LONG).show();
-//                    btnEuquals.setEnabled(false);
-//                }
-//                else {
-//                    btnEuquals.setEnabled(true);
-//
-//                }
-//                if (!btnBrackClose.isCheckable() || !btnBrackOpen.isCheckable()) {
-//
-//                    Toast.makeText(MainActivity.this, "Your syntax is wrong", Toast.LENGTH_LONG).show();
-//                    btnEuquals.setEnabled(false);
-//
-//                }
-//                else {
-//                    btnEuquals.setEnabled(true);
-                    String val = resultTV.getText().toString();
-                    String replacedstr = val.replace('÷','/').replace('×','*');
+                String val = resultTV.getText().toString();
+                checkDot();
+                String replacedstr = val.replace('÷', '/').replace('×', '*');
+
+                if (replacedstr.charAt(replacedstr.length() - 1) == '-' || replacedstr.charAt(replacedstr.length() - 1) == '+'
+                        || replacedstr.charAt(replacedstr.length() - 1) == '*' || replacedstr.charAt(replacedstr.length() - 1) == '/') {
+                    String a = "Error !!!";
+                    resultTV.setText(a);
+                } else {
                     double answer = eval(replacedstr);
                     resultTV.setText(String.valueOf(answer));
                     solutionTV.setText(val);
+                }
 //                }
             }
         });
     }
+    public void checkDot (){
+        int count = 0;
+        String val = resultTV.getText().toString();
+        if (val.contains(".")) {
+            count++;
+        }
+        if (count > 0)
+            btnDot.setEnabled(false);
+    };
 
     public static double eval(final String str) {
         return new Object() {
