@@ -1,5 +1,6 @@
 package hcmute.edu.vn.calculator;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,13 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 
 import java.util.concurrent.ExecutionException;
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+
 
 
 public class MainActivity extends AppCompatActivity {
 
     TextView resultTV, solutionTV;
     MaterialButton btnC, btnBracket;
-    MaterialButton btnDivide, btnMul, btnPlus, btnMinus, btnEuquals;
+    MaterialButton btnDivide, btnMul, btnPlus, btnMinus, btnEuquals, btnPercent;
     MaterialButton btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn0;
     MaterialButton btnAC, btnDot;
 
@@ -48,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         btnAC = findViewById(R.id.button_AC);
         btnC = findViewById(R.id.button_c);
         btnBracket = findViewById(R.id.button_open_bracket);
-//        btnBrackClose = findViewById(R.id.button_close_bracket);
+        btnPercent = findViewById(R.id.button_square);
+
 
 
 
@@ -192,61 +197,101 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        btnPercent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resultTV.setText(resultTV.getText()+"%");
+                resultTV.setTextColor(Color.parseColor("#e21212"));
+
+                btnDot.setEnabled(false);
+                btnDivide.setEnabled(false);
+                btnMul.setEnabled(false);
+                btnPlus.setEnabled(false);
+                btnMinus.setEnabled(false);
+
+            }
+        });
+
         //Operator
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 resultTV.setText(resultTV.getText()+"+");
+                resultTV.setTextColor(Color.parseColor("#e21212"));
+
                 btnDot.setEnabled(false);
                 btnDivide.setEnabled(false);
                 btnMul.setEnabled(false);
+                btnPercent.setEnabled(false);
             }
         });
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"-");
+                resultTV.setTextColor(Color.parseColor("#e21212"));
+
                 btnDot.setEnabled(false);
+                btnPlus.setEnabled(false);
                 btnDivide.setEnabled(false);
                 btnMul.setEnabled(false);
+                btnPercent.setEnabled(false);
             }
         });
         btnMul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"×");
+                resultTV.setTextColor(Color.parseColor("#e21212"));
+
                 btnDot.setEnabled(false);
                 btnDivide.setEnabled(false);
+                btnPlus.setEnabled(false);
+
                 btnMul.setEnabled(false);
+                btnPercent.setEnabled(false);
             }
         });
         btnDivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 resultTV.setText(resultTV.getText()+"÷");
+                resultTV.setTextColor(Color.parseColor("#e21212"));
+
                 btnDot.setEnabled(false);
                 btnDivide.setEnabled(false);
                 btnMul.setEnabled(false);
+                btnPlus.setEnabled(false);
+                btnPercent.setEnabled(false);
+
             }
         });
         btnEuquals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String val = resultTV.getText().toString();
-                checkDot();
-                String replacedstr = val.replace('÷', '/').replace('×', '*');
+                try {
 
-                if (replacedstr.charAt(replacedstr.length() - 1) == '-' || replacedstr.charAt(replacedstr.length() - 1) == '+'
-                        || replacedstr.charAt(replacedstr.length() - 1) == '*' || replacedstr.charAt(replacedstr.length() - 1) == '/') {
-                    String a = "Error !!!";
-                    resultTV.setText(a);
-                } else {
-                    double answer = eval(replacedstr);
-                    resultTV.setText(String.valueOf(answer));
-                    solutionTV.setText(val);
+                    String val = resultTV.getText().toString();
+                    checkDot();
+                    String replacedstr = val.replace('÷', '/').replace('×', '*');
+
+                    if (replacedstr.charAt(replacedstr.length() - 1) == '-'
+                            || replacedstr.charAt(replacedstr.length() - 1) == '+'
+                            || replacedstr.charAt(replacedstr.length() - 1) == '*'
+                            || replacedstr.charAt(replacedstr.length() - 1) == '/') {
+
+                        String a = "Error !!!";
+                        resultTV.setText(a);
+                    } else {
+                        double answer = eval(replacedstr);
+                        resultTV.setText(String.valueOf(answer));
+                        solutionTV.setText(val);
+                    }
+                }catch (IllegalArgumentException ie){
+                    resultTV.setText("Error !!");
                 }
-//                }
             }
         });
     }
@@ -256,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
         if (val.contains(".")) {
             count++;
         }
-        if (count > 0)
+        if (count > 1)
             btnDot.setEnabled(false);
     };
 
@@ -295,6 +340,9 @@ public class MainActivity extends AppCompatActivity {
                 for (;;) {
                     if      (eat('+')) x += parseTerm(); // addition
                     else if (eat('-')) x -= parseTerm(); // subtraction
+
+
+
                     else return x;
                 }
             }
@@ -306,7 +354,8 @@ public class MainActivity extends AppCompatActivity {
                         x *= parseFactor(); // multiplication
                     else if (eat('/'))
                         x /= parseFactor(); // division
-
+                    else if (eat('%'))
+                        x /=100;
                     else return x;
                 }
             }
