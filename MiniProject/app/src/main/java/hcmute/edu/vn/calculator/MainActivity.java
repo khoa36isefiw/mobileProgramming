@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //onClick listener
+        // xét sự kiện - onClick listener cho từng button; Các button sẽ có chức năng khác nhau
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resultTV.setText(resultTV.getText()+"3");
+                resultTV.setText(resultTV.getText()+"3"); // số 3 xuất hiện trên màn hình
                 btnDot.setEnabled(true);
                 btnMul.setEnabled(true);
                 btnDivide.setEnabled(true);
@@ -204,11 +204,7 @@ public class MainActivity extends AppCompatActivity {
                 resultTV.setText(resultTV.getText()+"%");
                 resultTV.setTextColor(Color.parseColor("#e21212"));
 
-                btnDot.setEnabled(false);
-                btnDivide.setEnabled(false);
-                btnMul.setEnabled(false);
-                btnPlus.setEnabled(false);
-                btnMinus.setEnabled(false);
+
 
             }
         });
@@ -224,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                 btnDot.setEnabled(false);
                 btnDivide.setEnabled(false);
                 btnMul.setEnabled(false);
-                btnPercent.setEnabled(false);
+                //btnPercent.setEnabled(false);
             }
         });
         btnMinus.setOnClickListener(new View.OnClickListener() {
@@ -234,10 +230,9 @@ public class MainActivity extends AppCompatActivity {
                 resultTV.setTextColor(Color.parseColor("#e21212"));
 
                 btnDot.setEnabled(false);
-                btnPlus.setEnabled(false);
                 btnDivide.setEnabled(false);
                 btnMul.setEnabled(false);
-                btnPercent.setEnabled(false);
+                //btnPercent.setEnabled(false);
             }
         });
         btnMul.setOnClickListener(new View.OnClickListener() {
@@ -248,10 +243,9 @@ public class MainActivity extends AppCompatActivity {
 
                 btnDot.setEnabled(false);
                 btnDivide.setEnabled(false);
-                btnPlus.setEnabled(false);
 
                 btnMul.setEnabled(false);
-                btnPercent.setEnabled(false);
+                //btnPercent.setEnabled(false);
             }
         });
         btnDivide.setOnClickListener(new View.OnClickListener() {
@@ -263,16 +257,18 @@ public class MainActivity extends AppCompatActivity {
                 btnDot.setEnabled(false);
                 btnDivide.setEnabled(false);
                 btnMul.setEnabled(false);
-                btnPlus.setEnabled(false);
-                btnPercent.setEnabled(false);
+                //btnPercent.setEnabled(false);
 
             }
         });
-        btnEuquals.setOnClickListener(new View.OnClickListener() {
+
+
+
+        btnEuquals.setOnClickListener(new View.OnClickListener() {      // xử lý phép toán trả lại cho người dùng
             @Override
             public void onClick(View view) {
                 try {
-
+                    btnEuquals.setEnabled(true);
                     String val = resultTV.getText().toString();
                     checkDot();
                     String replacedstr = val.replace('÷', '/').replace('×', '*');
@@ -289,12 +285,14 @@ public class MainActivity extends AppCompatActivity {
                         resultTV.setText(String.valueOf(answer));
                         solutionTV.setText(val);
                     }
-                }catch (IllegalArgumentException ie){
+                }catch (IllegalArgumentException ie){   // trả về lỗi khi người dùng cố tình nhập sai --> dẫn đến crash apps
                     resultTV.setText("Error !!");
                 }
             }
         });
     }
+
+
     public void checkDot (){
         int count = 0;
         String val = resultTV.getText().toString();
@@ -304,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
         if (count > 1)
             btnDot.setEnabled(false);
     };
-
+        // hàm chính được dùng dể xử lý cho button Equal
     public static double eval(final String str) {
         return new Object() {
             int pos = -1, ch;
@@ -335,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
             // factor = `+` factor | `-` factor | `(` expression `)`
             //        | number | functionName factor | factor `^` factor
 
-            double parseExpression() {
+            double parseExpression() {  // dùng để chuyển các toán tử
                 double x = parseTerm();
                 for (;;) {
                     if      (eat('+')) x += parseTerm(); // addition
@@ -347,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            double parseTerm() {
+            double parseTerm() {    // xử lý các phép nhân, chia %
                 double x = parseFactor();
                 for (;;) {
                     if (eat('*'))
